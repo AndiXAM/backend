@@ -1,0 +1,30 @@
+<!-- templates/tournaments/team_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Команды турнира {{ tournament.name }}</title>
+</head>
+<body>
+<h1>Команды турнира: {{ tournament.name }}</h1>
+
+<ul>
+    {% for team in teams %}
+        <li>
+            <strong>{{ team.name }}</strong>
+            <ul>
+                {% for player in team.players.all %}
+                    <li>{{ player.name }} {{ player.surname }}</li> <!-- Display player names -->
+                {% empty %}
+                    <li>Нет игроков в команде.</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% empty %}
+        <li>Нет команд в турнире.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'tournament_list' %}">Назад к списку турниров</a> <!-- Link back to tournaments list -->
+</body>
+</html>

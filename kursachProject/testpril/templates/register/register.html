@@ -1,0 +1,17 @@
+<!-- templates/register/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+<h2>Создать аккаунт</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Зарегистрироваться</button>
+</form>
+<a href="{% url 'tournament_list' %}">Назад к списку турниров</a>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список турниров</title>
+</head>
+<body>
+<h1>Список турниров</h1>
+
+{% if request.user.is_authenticated %}
+    <p>Добро пожаловать, {{ request.user.username }}!</p> <!-- Display username -->
+    <form method="post" action="{% url 'logout' %}"> <!-- URL для выхода -->
+        {% csrf_token %}
+        <button type="submit">Выйти</button> <!-- Кнопка выхода -->
+    </form>
+{% else %}
+    <h2>Вход в аккаунт</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- Render the login form -->
+        <button type="submit">Войти</button>
+    </form>
+    <a href="{% url 'register' %}">Зарегистрироваться</a>  <br><!-- Link to registration page -->
+{% endif %}
+
+<a href="http://127.0.0.1:8000/">обратно</a> <br>
+{% if request.user.is_authenticated %}
+<a href="{% url 'create_tournament' %}">Создать собственный турнир</a>
+{% endif %}
+
+
+<ul>
+    {% for tournament in tournaments %}
+        <li>
+            {{ tournament.name }} - Игра: {{ tournament.game.name }} -
+            Количество игроков: {{ tournament.player_count }} / {{ tournament.max_player_count }} -
+            Дата: {{ tournament.date|date:"d.m.Y H:i" }} -
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'select_team' tournament.id %}">Выбрать команду</a>
+            {% endif %}
+            <a href="{% url 'tournament_teams' tournament.id %}">Посмотреть команды</a>
+        </li>
+    {% empty %}
+        <li>Нет доступных турниров.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

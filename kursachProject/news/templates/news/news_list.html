@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости киберспорта</title>
+</head>
+<body>
+    <h1>Новости киберспорта</h1>
+    <a href="http://127.0.0.1:8000/">обратно</a>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h2><a href="{% url 'news_detail' article.id %}">{{ article.title }}</a></h2>
+                <p>{{ article.content|slice:":50" }}{% if article.content|length > 50 %}...{% endif %}</p>
+                <small>{{ article.published_date }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

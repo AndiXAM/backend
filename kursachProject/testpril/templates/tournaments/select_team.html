@@ -1,0 +1,23 @@
+<!-- templates/tournaments/select_team.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор команды для {{ tournament.name }}</title>
+</head>
+<body>
+<h1>Выберите команду для турнира {{ tournament.name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <select name="team" required>
+        {% for team in teams %}
+            <option value="{{ team.id }}">{{ team.name }}</option>
+        {% empty %}
+            <option disabled>Нет доступных команд</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Выбрать команду</button>
+</form>
+<a href="{% url 'tournament_list' %}">Назад к списку турниров</a>
+</body>
+</html>

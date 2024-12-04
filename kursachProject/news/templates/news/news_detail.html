@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>
+    <small>Опубликовано: {{ article.published_date }}</small>
+
+    <a href="{% url 'news_list' %}">Назад</a>
+</body>
+</html>
