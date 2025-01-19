@@ -120,11 +120,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
+REST_FRAMEWORK = { #вот эта часть украдена с stackowerflow спасибо тому человеку. КРАЙНЕ вероятно что я сделал себе 0 безопасность тем самым
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny',
     ]
 }
 
